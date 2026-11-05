@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    min-width: 0;
+}
+
+html,
+body {
+    position: relative;
+    height: 100vh;
+}
+
+:root {
+    --main-padding: 5rem;
+    --border-1: 1px solid blue;
+}
+
+main {
+    display: flex;
+    position: relative;
+    height: 90%;
+
+    & > sim-city {
+        flex: 0 0 85%;
+    }
+
+    & > aside {
+        flex: 1;
+    }
+}

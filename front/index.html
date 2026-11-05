@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>foss-eco-simcity-hex-front</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="public/dist/styles.css" />
+        <script type="importmap">
+            {
+                "imports": {
+                    "assets": "./public/dist/assets/_index.js",
+                    "constants": "./public/dist/constants/_index.js",
+                    "utils": "./public/dist/utils/_index.js",
+                    "components": "./public/dist/components/_index.js",
+                    "api": "./public/dist/api/_index.js",
+                    "main": "./public/dist/main.js"
+                }
+            }
+        </script>
+        <script type="module" src="./public/dist/components/_index.js"></script>
+        <script type="module" src="./public/dist/main.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <sim-city>
+                <sim-canvas id="grid"></sim-canvas>
+                <sim-canvas id="artifacts"></sim-canvas>
+                <sim-canvas id="zones"></sim-canvas>
+                <sim-canvas id="heatmap"></sim-canvas>
+                <sim-canvas id="ui"></sim-canvas>
+            </sim-city>
+
+            <aside>
+                <sim-menu id="sim_menu"></sim-menu>
+            </aside>
+        </main>
+
+        <footer>
+            <div>todo: sim-newsfeed</div>
+        </footer>
+
+        <!-- renderless components -->
+        <sim-build-pathway></sim-build-pathway>
+        <sim-build-artifact></sim-build-artifact>
+        <sim-zone-super-kind></sim-zone-super-kind>
+        <sim-get-city-traffic></sim-get-city-traffic>
+        <sim-destroy-artifact></sim-destroy-artifact>
+    </body>
+</html>

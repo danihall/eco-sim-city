@@ -1,0 +1,7 @@
+:host {
+    & button {
+        &.is-toggled {
+            color: #bada55;
+        }
+    }
+}

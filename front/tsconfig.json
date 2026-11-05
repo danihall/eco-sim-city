@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "*": ["./*"],
+      "assets": ["./src/assets/_index.js"],
+      "constants": ["./src/constants/_index.js"],
+      "utils": ["./src/utils/_index.js"],
+      "main": ["./src/main.js"],
+      "components": ["./src/components/_index.js"],
+      "api": ["./src/api/_index.js"],
+    },
+  },
+  "include": ["src/**/*", "global.d.ts", "src/main.ts"],
+}
