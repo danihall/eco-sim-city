@@ -1,6 +1,0 @@
-[submodule "back-end"]
-	path = back-end
-	url = https://git.sr.ht/~danihall/foss-eco-simcity-hex-back
-[submodule "front-end"]
-	path = front-end
-	url = https://git.sr.ht/~danihall/foss-eco-simcity-hex-front
