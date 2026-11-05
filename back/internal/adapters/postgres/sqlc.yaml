@@ -1,0 +1,62 @@
+version: "2"
+sql:
+  - engine: postgresql
+    schema:
+      - .migrations
+    queries:
+      - .queries/static
+      - .queries/mutable
+      - .queries/computed
+    gen:
+      go:
+        package: sqlc
+        out: sqlc
+        sql_package: pgx/v5
+        sql_driver: github.com/jackc/pgx/v5
+        emit_db_tags: true
+        emit_json_tags: false
+        overrides:
+          - db_type: mutable.valid_email
+            go_type: string
+          - db_type: pg_catalog.timestamptz
+            go_type:
+              import: time
+              type: Time
+          - column: static.super_kinds.id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.SuperKindType
+
+          - column: static.kinds.id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.KindType
+          - column: static.kinds.super_kind_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.SuperKindType
+
+          - column: static.artifacts.id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.ArtifactType
+          - column: static.artifacts.super_kind_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.SuperKindType
+          - column: static.artifacts.kind_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.KindType
+
+          - column: static.ordinances.id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.OrdinanceType
+
+          - column: mutable.tiles.artifact_status
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.ArtifactStatus
+          - column: mutable.tiles.super_kind_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.SuperKindType
+          - column: mutable.tiles.kind_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.KindType
+          - column: mutable.tiles.artifact_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.ArtifactType
+
+          - column: mutable.employments.worker_artifact_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.ArtifactType
+
+          - column: mutable.cities_budget.kind_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.KindType
+
+          - column: mutable.ordinances_enacted.ordinance_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.OrdinanceType
+
+          - column: mutable.cities_flagships.artifact_id
+            go_type: git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core.ArtifactType
