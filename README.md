@@ -1,5 +1,8 @@
 ## in active development
 
+<img width="1511" height="831" alt="screenshot" src="https://github.com/user-attachments/assets/1457583a-1bf9-4724-9a93-4a0fcfc43854" />
+
+
 This project aims to implicitly raise questions about contemporary issues related to the life of a city's citizen.
 
 The goal is to try to subvert the game mechanics of classic city-builders, such as Simcity, to gear the player's decisions toward a sustainable city.
