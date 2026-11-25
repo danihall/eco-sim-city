@@ -1,13 +1,13 @@
 import type { SuperKindId, SUPER_KINDS_BY_ID } from "assets";
 import { getCityID } from "utils";
 
-type ZoneSuperKindPayload = {
+type UpdateZonePayload = {
   super_kind_name: (typeof SUPER_KINDS_BY_ID)[SuperKindId];
   top_left: Coordinates;
   bottom_right: Coordinates;
 };
 
-async function zoneSuperKind(payload: ZoneSuperKindPayload): Promise<Tile[]> {
+async function updateZone(payload: UpdateZonePayload): Promise<Tile[]> {
   const method = "PATCH";
   const headers = { "Content-Type": "application/json" };
   const url = `/city/${getCityID()}/zoning/update`;
@@ -35,5 +35,5 @@ async function zoneSuperKind(payload: ZoneSuperKindPayload): Promise<Tile[]> {
   return updated_tiles as Tile[];
 }
 
-export type { ZoneSuperKindPayload };
-export { zoneSuperKind };
+export type { UpdateZonePayload };
+export { updateZone };

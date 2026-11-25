@@ -8,6 +8,7 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "strictBindCallApply": true,
     "paths": {
       "*": ["./*"],
       "assets": ["./src/assets/_index.js"],
@@ -16,7 +17,8 @@
       "main": ["./src/main.js"],
       "components": ["./src/components/_index.js"],
       "api": ["./src/api/_index.js"],
+      "fonts": ["./src/fonts.css"],
     },
   },
-  "include": ["src/**/*", "global.d.ts", "src/main.ts"],
+  "include": ["src/**/*", "global.d.ts" ,"src/main.ts"],
 }

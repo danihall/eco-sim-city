@@ -20,8 +20,75 @@ body {
 }
 
 :root {
+    --pure-white: #fff;
+
+    --grey: #fffef9;
+    --grey-dimmed: #f2f2e5;
+    --grey-strong: #bfbfbf;
+    --grey-very-strong: #9e9d9b;
+
+    --pure-black: #000;
+    --pure-black-dimmed: #242220;
+    --black: #333231;
+    --black-dimmed: #4f4d48;
+
+    --green: #94ef4b;
+    --green-dimmed: #c3fa99;
+
+    --shadow-1: 4px 4px 24px 0px rgba(0, 0, 0, 0.44);
+    --shadow-2: 2px 6px 16px 0px rgba(0, 0, 0, 0.3);
+    --shadow-3: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+
     --main-padding: 5rem;
-    --border-1: 1px solid blue;
+    --border-1: 1px solid var(--grey-strong);
+    --border-2: 2px solid var(--grey-strong);
+    --border-1-dimmed: 1px solid var(--grey-dimmed);
+    --border-2-dimmed: 1px solid var(--grey-dimmed);
+    --border-radius-small: 4px;
+    --border-radius-medium: 7px;
+    --border-radius-large: 12px;
+
+    --padding-x-small: 10px;
+    --padding-y-small: 5px;
+    --padding-x-medium: 16px;
+    --padding-y-medium: 8px;
+    --padding-x-large: 48px;
+    --padding-y-large: 32px;
+
+    --bg-color: var(--grey);
+    --bg-color-dimmed: var(--grey-dimmed);
+
+    --bg-input-checked: var(--green);
+    --bg-input-intent-uncheck: var(--green-dimmed);
+
+    --spring-easing: linear(
+        0,
+        0.009,
+        0.035 2.1%,
+        0.141,
+        0.281 6.7%,
+        0.723 12.9%,
+        0.938 16.7%,
+        1.017,
+        1.077,
+        1.121,
+        1.149 24.3%,
+        1.159,
+        1.163,
+        1.161,
+        1.154 29.9%,
+        1.129 32.8%,
+        1.051 39.6%,
+        1.017 43.1%,
+        0.991,
+        0.977 51%,
+        0.974 53.8%,
+        0.975 57.1%,
+        0.997 69.8%,
+        1.003 76.9%,
+        1.004 83.8%,
+        1
+    );
 }
 
 main {
@@ -36,4 +103,11 @@ main {
     & > aside {
         flex: 1;
     }
+}
+
+hr {
+    all: unset;
+    display: block;
+    height: 1px;
+    background-color: var(--grey-strong);
 }

@@ -26,7 +26,7 @@ async function init(data: InitData): Promise<ReadyMessage> {
   canvas = data.offscreen_canvas;
   ctx = canvas.getContext("2d")!;
   ctx.imageSmoothingEnabled = false;
-  ctx.strokeStyle = "#989898";
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.3)";
   ctx.lineWidth = 1;
 
   pixel_ratio = data.pixel_ratio;
@@ -42,8 +42,10 @@ function render(data: RenderData) {
   }
 }
 
-const half_hex = 7.5;
-const half_side = 3.5;
+// const half_hex = 7.5;
+// const half_side = 3.5;
+const half_hex = 8;
+const half_side = 4;
 
 function drawHexLines(center: PixelCoordinates) {
   ctx.beginPath();

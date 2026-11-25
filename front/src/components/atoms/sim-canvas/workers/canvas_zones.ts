@@ -26,10 +26,7 @@ async function onMessage(event: MessageEvent<WorkerZonesInit | RenderData>) {
     case "init":
       return init(data).then(self.postMessage);
     case "render":
-      if (!is_drawing) {
-        is_drawing = true;
-        return render(data);
-      }
+      return render(data);
   }
 }
 
@@ -58,8 +55,6 @@ function render(data: RenderData) {
       drawZone(zone, center);
     }
   }
-
-  is_drawing = false;
 }
 
 function getZone(tile_index: number) {

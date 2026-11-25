@@ -24,7 +24,7 @@ try {
     { names: [], values: [] },
   );
 
-  let base_y = 0;
+  let base_y = -1;
 
   config.values.forEach((value, index) => {
     const name = config.names[index];
@@ -42,10 +42,11 @@ try {
     if (typeof value.y !== "number" || value.y % 16 !== 0) {
       throw Error(`"y" should be a multiple of 16 in "${name}": ${JSON.stringify(value)}`);
     }
-    if (value.y < base_y) {
+    if (value.y <= base_y) {
       throw Error(`
         each subsequent sprite should have a higher "y" value.
-        Last "y" value was ${base_y}, "${name}": ${JSON.stringify(value)} has ${value.y}.
+        Last "y" value was ${base_y} from "${config.names[index - 1]}",
+        next sprite "${name}": ${JSON.stringify(value)} has ${value.y}.
         `);
     }
 

@@ -16,10 +16,7 @@ async function onMessage(event) {
         case "init":
             return init(data).then(self.postMessage);
         case "render":
-            if (!is_drawing) {
-                is_drawing = true;
-                return render(data);
-            }
+            return render(data);
     }
 }
 async function init(data) {
@@ -41,7 +38,6 @@ function render(data) {
             drawZone(zone, center);
         }
     }
-    is_drawing = false;
 }
 function getZone(tile_index) {
     const zone_type = SUPER_KINDS_BY_ID[zones[tile_index]];

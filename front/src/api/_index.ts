@@ -1,12 +1,20 @@
-export type { BuildPathwayPayload } from "./build_pathway.js";
 export type { BuildSingleArtifactPayload } from "./build_artifact.js";
+export type { BuildPathwayPayload } from "./build_pathway.js";
+export type { CreateCityPayload } from "./create_full_city.js";
+export type { DeleteCityPayload } from "./delete_city.js";
 export type { DestroyArtifactPayload } from "./destroy_artifact.js";
-export type { ZoneSuperKindPayload } from "./update_zone.js";
+export type { RevertZonePayload } from "./revert_zone.js";
+export type { UpdateZonePayload } from "./update_zone.js";
 
-export { buildPathway } from "./build_pathway.js";
 export { buildSingleArtifact } from "./build_artifact.js";
+export { buildPathway } from "./build_pathway.js";
+export { createCity } from "./create_full_city.js";
+export { deleteCity } from "./delete_city.js";
 export { destroyArtifact } from "./destroy_artifact.js";
 export { getAllTiles } from "./get_city_tiles_artifacts.js";
 export { getTraffic } from "./get_city_traffic.js";
+export { getAllOrdinances } from "./get_all_ordinances.js";
 export { getSpritesheet } from "./get_spritesheet.js";
-export { zoneSuperKind } from "./update_zone.js";
+export { revertZone } from "./revert_zone.js";
+export { setOrdinances } from "./set_ordinances.js";
+export { updateZone } from "./update_zone.js";

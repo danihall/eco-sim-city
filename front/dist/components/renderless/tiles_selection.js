@@ -29,11 +29,11 @@ function newTilesBuffers(capacity) {
  * To be used in any iteration.
  */
 function updateBuffers(tile, index) {
-    const { qs, rs, item_ids, occupied, artifact_id, city_state } = this;
+    const { qs, rs, item_ids, occupied, item_id, city_state } = this;
     const is_occupied = isOccupiedTile({ ...tile, city_state });
     qs[index] = tile.q;
     rs[index] = tile.r;
-    item_ids[index] = artifact_id;
+    item_ids[index] = item_id;
     occupied[index] = Number(is_occupied);
 }
 export { isOccupiedTile, newTilesBuffers, updateBuffers };

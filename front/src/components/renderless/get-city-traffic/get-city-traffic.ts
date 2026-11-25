@@ -1,6 +1,5 @@
 import { TILES_COUNT } from "constants";
-import { SimMenu } from "components";
-import { BaseComponent } from "../../_base_component/component.js";
+import { UdonComponent, SimMenu } from "components";
 
 import * as api from "api";
 
@@ -13,7 +12,7 @@ type TrafficData = {
   subway_bytes: Uint32Array<ArrayBuffer>;
 };
 
-class SimGetCityTraffic extends BaseComponent {
+class SimGetCityTraffic extends UdonComponent {
   constructor() {
     super();
     const canvas = this.ownerDocument.getElementById("grid");

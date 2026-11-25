@@ -1,5 +1,5 @@
-import { BaseComponent } from "../../_base_component/component.js";
-class SimGetCityTraffic extends BaseComponent {
+import { UdonComponent } from "components";
+class SimGetCityTraffic extends UdonComponent {
     constructor() {
         super();
         const canvas = this.ownerDocument.getElementById("grid");

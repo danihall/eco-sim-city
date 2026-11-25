@@ -39,3 +39,15 @@ declare type Sprite = {
   width: number;
   height: number;
 };
+
+declare type OrdinanceType = "DrugPrevention" | "PassCulture" | "VSSCampaign" | "FreeBicycles";
+
+declare type Ordinance = {
+  ordinance: {
+    name: OrdinanceType;
+    label: string;
+    description: string;
+  };
+  total_cost: number;
+  is_enacted: boolean;
+};

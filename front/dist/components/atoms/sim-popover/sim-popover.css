@@ -1,0 +1,48 @@
+sim-popover {
+    & > div[popover] {
+        position-area: block-start center;
+        width: max-content;
+        max-width: 30vw;
+        max-height: 50vh;
+        overflow: visible;
+        padding: 0;
+        border: none;
+        border-radius: var(--border-radius-large);
+        background-color: #fefefc;
+        box-shadow: var(--shadow-2);
+        opacity: 0;
+        translate: 0 -16px;
+
+        &:popover-open {
+            animation: popoverSlideIn;
+            animation-duration: 400ms;
+            animation-timing-function: var(--spring-easing);
+            animation-fill-mode: forwards;
+        }
+
+        & > div {
+            position: relative;
+            padding: var(--padding-y-medium) var(--padding-x-medium)
+                calc(var(--padding-y-medium) + 8px) var(--padding-x-medium);
+
+            & > .tip {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                translate: -50% 0;
+                width: 20px;
+                height: 16px;
+                clip-path: polygon(50% 100%, 100% 0%, 0% 0%);
+                background-color: var(--bg-color);
+                box-shadow: var(--shadow-2);
+            }
+        }
+    }
+}
+
+@keyframes popoverSlideIn {
+    to {
+        opacity: 1;
+        translate: 0 -24px;
+    }
+}

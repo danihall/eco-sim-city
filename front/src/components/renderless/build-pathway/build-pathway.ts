@@ -3,7 +3,7 @@ import type { ArtifactId, ArtifactName, SuperKindName, TileStatusName } from "as
 import type { CameraState, ChannelEvents, CityData } from "components";
 import type { BuildPathwayPayload } from "api";
 
-import { BaseComponent } from "components";
+import { UdonComponent } from "components";
 import * as $ from "assets";
 import * as _ from "utils";
 import * as api from "api";
@@ -21,7 +21,7 @@ const REGEX_EFFECTIVE_ARTIFACT = /Road|PedestrianBicycleWay|Rail/;
  * Renderless component that allows user to launch construction
  * of a transport network artifact. The pathway is immediately constructed.
  */
-class SimBuildPathway extends BaseComponent {
+class SimBuildPathway extends UdonComponent {
   #camera!: CameraState;
   #artifact_id: ArtifactId | null = null;
   #anchor: Coordinates | null = null;
@@ -32,8 +32,8 @@ class SimBuildPathway extends BaseComponent {
   /**
    * Only listen for "click" if all required elements are in the DOM.
    */
-  async onComponentMounted() {
-    this.channel.subscribe("menu-state-change", this);
+  async onMounted() {
+    this.channel.subscribe("menu-state-change");
   }
 
   /**
@@ -52,7 +52,7 @@ class SimBuildPathway extends BaseComponent {
 
     [this.#camera] = await this.channel.request("sim-city", "camera");
     this.#artifact_id = $.ARTIFACTS_BY_NAME[selected_item as ArtifactsKey];
-    this.channel.subscribe("city-pointer-event", this);
+    this.channel.subscribe("city-pointer-event");
     this.ownerDocument.addEventListener("keydown", this);
   }
 
@@ -148,7 +148,7 @@ class SimBuildPathway extends BaseComponent {
     const typed_arrays = newTilesBuffers(path_line.length);
 
     const context = {
-      artifact_id: this.#artifact_id!,
+      item_id: this.#artifact_id!,
       city_state,
       ...typed_arrays,
     };
@@ -218,7 +218,7 @@ class SimBuildPathway extends BaseComponent {
     this.#artifact_id &&= null;
     this.#anchor &&= null;
 
-    this.channel.unSubscribe("city-pointer-event", this);
+    this.channel.unSubscribe("city-pointer-event");
     this.ownerDocument.removeEventListener("keydown", this);
   }
 }

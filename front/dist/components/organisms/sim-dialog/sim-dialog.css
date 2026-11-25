@@ -1,0 +1,73 @@
+:host {
+    & > dialog {
+        margin-top: var(--margin-top, 20%);
+        margin-right: var(--margin-right, auto);
+        margin-bottom: var(--margin-bottom, auto);
+        margin-left: var(--margin-left, auto);
+        inset: 0;
+        max-width: 70vw;
+        width: var(--width, fit-content);
+        overflow: visible;
+        border: var(--border-2);
+        border-radius: var(--border-radius-small);
+        padding: 0;
+        opacity: 0;
+        background-color: var(--bg-color);
+        box-shadow: var(--shadow-1);
+        translate: 8px 0;
+
+        & > button {
+            appearance: none;
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            font-size: 10px;
+            padding-inline: 7px;
+            padding-block: 2px;
+            background-color: var(--bg-color-dimmed);
+            border-bottom-left-radius: var(--border-radius-small);
+            border-top-right-radius: var(--border-radius-small);
+            border: var(--border-1);
+
+            &:hover {
+                background-color: var(--pure-white);
+            }
+        }
+
+        & > div {
+            padding: var(--padding-y-large) var(--padding-x-large)
+                calc(var(--padding-y-large) + 8px) var(--padding-x-large);
+            max-height: 75vh;
+            overflow: auto;
+        }
+
+        &[open] {
+            animation: dialogSlideDown;
+            animation-duration: 100ms;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+
+            &::backdrop {
+                background-color: rgba(255, 255, 255, 0);
+                animation: backdropFadeIn;
+                animation-duration: 3s;
+                animation-fill-mode: forwards;
+            }
+        }
+    }
+}
+
+@keyframes dialogSlideDown {
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+@keyframes backdropFadeIn {
+    to {
+        backdrop-filter: grayscale(40%) brightness(90%) blur(0.5px);
+    }
+}

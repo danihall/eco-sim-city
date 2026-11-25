@@ -1,4 +1,4 @@
-import { BaseComponent } from "components";
+import { UdonComponent } from "components";
 
 import css from "./sim-button-icon.css" with { type: "css" };
 
@@ -9,29 +9,28 @@ declare module "components" {
 }
 
 type SimButtonIconProps = {
-  class_1: (text: string) => string;
   disabled: (toggle: boolean) => boolean;
-  toggled: (toggle: boolean) => boolean;
 };
 
-class SimButtonIcon extends BaseComponent<SimButtonIconProps> {
-  static styles = [css];
+class SimButtonIcon extends UdonComponent<SimButtonIconProps> {
+  static css = [css];
+
+  disabled = (toggle = false) => toggle;
 
   render() {
-    this.html`
-      <button class="sim-btn">
+    return this.html /* html */ `
+      <button :disabled:=${this.disabled}>
         <slot></slot>
       </button>
       `;
   }
 
-  async onComponentMounted() {
+  async onMounted() {
     this.addEventListener("click", this);
   }
 
   onClick() {
-    this.update.disabled?.(!this.props.disabled);
-    this.update.toggled?.(!this.props.toggled);
+    this.update.disabled(!this._disabled);
   }
 }
 

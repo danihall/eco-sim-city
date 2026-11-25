@@ -5,7 +5,7 @@ import type { Chunk } from "utils";
 // import type { RenderUIData } from "workers";
 import type { DestroyArtifactPayload } from "api";
 
-import { BaseComponent } from "components";
+import { UdonComponent } from "components";
 import { SPRITESHEET } from "constants";
 import * as $ from "assets";
 import * as _ from "utils";
@@ -15,14 +15,14 @@ import { newTilesBuffers, updateBuffers } from "../tiles_selection.js";
 /**
  * Renderless component that allows to destroy an artifact.
  */
-class SimDestroyArtifact extends BaseComponent {
+class SimDestroyArtifact extends UdonComponent {
   #city!: SimCity;
 
   #can_tick = true;
   #throttled = 0;
 
-  async onComponentMounted() {
-    this.channel.subscribe("menu-state-change", this);
+  async onMounted() {
+    this.channel.subscribe("menu-state-change");
   }
 
   /**
@@ -36,7 +36,7 @@ class SimDestroyArtifact extends BaseComponent {
 
     this.#city = await this.channel.request("sim-city");
 
-    this.channel.subscribe("city-pointer-event", this);
+    this.channel.subscribe("city-pointer-event");
     this.ownerDocument.addEventListener("keydown", this);
   }
 
@@ -79,7 +79,7 @@ class SimDestroyArtifact extends BaseComponent {
     console.log(tiles_count);
     const typed_arrays = newTilesBuffers(tiles_count);
     const context = {
-      artifact_id: anchor_artifact_id,
+      item_id: anchor_artifact_id,
       city_state: this.#city.state,
       ...typed_arrays,
     };
@@ -151,7 +151,7 @@ class SimDestroyArtifact extends BaseComponent {
 
     this.#can_tick = true;
 
-    this.channel.unSubscribe("city-pointer-event", this);
+    this.channel.unSubscribe("city-pointer-event");
     this.ownerDocument.removeEventListener("keydown", this);
   }
 }

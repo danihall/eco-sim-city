@@ -1,0 +1,43 @@
+:host {
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    & > svg {
+        animation-name: svgRotate;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+
+        & > path {
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-width: 2;
+            stroke-dasharray: 1 99;
+            animation-name: svgExpandCircle;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+    }
+}
+
+@keyframes svgRotate {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+@keyframes svgExpandCircle {
+    0% {
+        stroke-dasharray: 1 99;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 70 30;
+        stroke-dashoffset: -25;
+    }
+    100% {
+        stroke-dasharray: 1 99;
+        stroke-dashoffset: -100;
+    }
+}

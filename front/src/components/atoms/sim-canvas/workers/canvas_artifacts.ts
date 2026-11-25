@@ -50,12 +50,14 @@ function render(data: RenderData) {
 
     if (artifact_id > 0) {
       const artifact_name = ARTIFACTS_BY_ID[artifact_ids[tile_index] as ArtifactId];
+      const sprite = spritesheet[artifact_name];
 
-      ctx.drawImage(
-        spritesheet[artifact_name],
-        center.x - C.HEX_WIDTH / 2,
-        center.y - C.HEX_HEIGHT / 2,
-      );
+      const dx = center.x - C.HEX_WIDTH / 2 - 0.5;
+      const dy = center.y - C.HEX_HEIGHT / 2;
+      const d_width = sprite.width + 1;
+      const d_height = sprite.height;
+
+      ctx.drawImage(sprite, dx, dy, d_width, d_height);
     }
   }
 }

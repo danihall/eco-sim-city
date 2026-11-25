@@ -10,7 +10,7 @@ type TileSelectionContext = {
   rs: Uint8Array<ArrayBuffer>;
   item_ids: Uint8Array<ArrayBuffer>;
   occupied: Uint8Array<ArrayBuffer>;
-  artifact_id: number;
+  item_id: number;
   city_state: CityData<Concrete>;
 };
 
@@ -50,12 +50,12 @@ function newTilesBuffers(capacity: number) {
  * To be used in any iteration.
  */
 function updateBuffers(this: TileSelectionContext, tile: TilePositionWithIndex, index: number) {
-  const { qs, rs, item_ids, occupied, artifact_id, city_state } = this;
+  const { qs, rs, item_ids, occupied, item_id, city_state } = this;
   const is_occupied = isOccupiedTile({ ...tile, city_state });
 
   qs[index] = tile.q;
   rs[index] = tile.r;
-  item_ids[index] = artifact_id;
+  item_ids[index] = item_id;
   occupied[index] = Number(is_occupied);
 }
 

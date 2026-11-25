@@ -7,7 +7,7 @@ import * as _ from "./helpers/helpers.js";
 
 type WorkerUiInit = InitData<never, "artifacts" | "zones">;
 
-type UIType = "ui_zones" | "ui_build_artifact" | "ui_destroy_artifact";
+type UIType = "ui_zones" | "ui_revert_zones" | "ui_build_artifact" | "ui_destroy_artifact";
 
 type UIData = {
   ui: UIType;
@@ -50,6 +50,7 @@ async function init(data: WorkerUiInit): Promise<ReadyMessage> {
   ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
 
   spritesheet = data.sprites;
+
   pixel_ratio = data.pixel_ratio;
 
   return { ready: true };
@@ -68,8 +69,6 @@ function render(data: RenderUIData) {
     ctx.filter = "grayscale(1)";
   }
 
-  // For now a lot of artifacts have a sprite of one tile dimension,
-  // so it's normal to see only one tile displayed (expect for free-size artifacts).
   for (let index = 0; index <= qs.length; index++) {
     const center = _.hexToPixel(qs[index], rs[index]);
 
@@ -104,6 +103,8 @@ function _getSpriteKey(ui: UIType, item_id: number) {
   switch (ui) {
     case "ui_zones":
       return SUPER_KINDS_BY_ID[item_id as SuperKindId];
+    case "ui_revert_zones":
+      return "Unzone";
     case "ui_build_artifact":
       return ARTIFACTS_BY_ID[item_id as ArtifactId];
     case "ui_destroy_artifact":

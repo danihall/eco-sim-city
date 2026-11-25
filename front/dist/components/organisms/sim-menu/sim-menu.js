@@ -1,13 +1,14 @@
-import { BaseComponent } from "components";
-import css from "./sim-menu.css" with { type: "css" };
-class SimMenu extends BaseComponent {
-    static styles = [css];
+import { UdonComponent } from "components";
+import css_global from "../../../styles.css" with { type: "css" };
+import css_menu from "./sim-menu.css" with { type: "css" };
+class SimMenu extends UdonComponent {
+    static css = [css_global, css_menu];
     #state = {
         selected_action: undefined,
         selected_item: undefined,
     };
     render() {
-        this.html `
+        return this.html /*html*/ `
       <div data-action="build" >
           <button data-item="BusStop">bus stop</button>
           <button data-item="TrainStation">train station</button>
@@ -17,9 +18,13 @@ class SimMenu extends BaseComponent {
           <button data-item="CoalPlant">centrale à charbon</button>
       </div>
 
-      <div data-action="zoning">
+      <div data-action="update-zoning">
           <button data-item="Industrial">zone industrial</button>
           <button data-item="Residential">zone residential</button>
+      </div>
+
+      <div data-action="revert-zoning">
+          <button>unzone</button>
       </div>
 
       <div data-action="build-pathway">
@@ -32,13 +37,17 @@ class SimMenu extends BaseComponent {
         <button>destroy</button>
       </div>
 
+      <div data-action="ordinances">
+        <button>arrêtés municipaux</button>
+      </div>
+
       <div data-action="query">
           <button data-item="traffic">query traffic</button>
       </div>
       <slot></slot>
       `;
     }
-    async onComponentMounted() {
+    async onMounted() {
         this.addEventListener("click", this);
     }
     onClick(event) {

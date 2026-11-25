@@ -1,0 +1,65 @@
+input-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    & > input {
+        appearance: none;
+        width: 22px;
+        height: 22px;
+        border: var(--border-1);
+        border-radius: var(--border-radius-small);
+
+        &:checked {
+            border-width: 1px;
+            background-color: var(--bg-input-checked);
+        }
+    }
+
+    & > input,
+    & > label {
+        cursor: pointer;
+    }
+
+    & > label {
+        color: var(--black);
+    }
+
+    & > button {
+        appearance: none;
+        display: block;
+        margin-top: -3px;
+        margin-left: 4px;
+        width: 22px;
+        height: 22px;
+        font-size: 0.8rem;
+        font-style: normal;
+        text-align: center;
+        line-height: 16px;
+        color: var(--grey-very-strong);
+        border-radius: 50%;
+        border: var(--border-1);
+        border-color: var(--grey-dimmed);
+        background-color: transparent;
+        box-shadow: var(--shadow-3);
+        cursor: help;
+
+        &:has(+ sim-popover:state(opened)) {
+            margin-top: 0;
+            box-shadow: none;
+        }
+    }
+
+    &:has(input:hover),
+    &:has(label:hover) {
+        &:state(checked) {
+            & > input {
+                border-width: 0;
+                background-color: var(--bg-input-intent-uncheck);
+            }
+        }
+        & > input {
+            border-width: 2px;
+        }
+    }
+}

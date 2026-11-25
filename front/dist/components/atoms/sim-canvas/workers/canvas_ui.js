@@ -40,8 +40,6 @@ function render(data) {
     if (data.ui === "ui_destroy_artifact") {
         ctx.filter = "grayscale(1)";
     }
-    // For now a lot of artifacts have a sprite of one tile dimension,
-    // so it's normal to see only one tile displayed (expect for free-size artifacts).
     for (let index = 0; index <= qs.length; index++) {
         const center = _.hexToPixel(qs[index], rs[index]);
         ctx.drawImage(spritesheet[sprite], center.x - C.HEX_WIDTH / 2, center.y - C.HEX_HEIGHT / 2);
@@ -66,6 +64,8 @@ function _getSpriteKey(ui, item_id) {
     switch (ui) {
         case "ui_zones":
             return SUPER_KINDS_BY_ID[item_id];
+        case "ui_revert_zones":
+            return "Unzone";
         case "ui_build_artifact":
             return ARTIFACTS_BY_ID[item_id];
         case "ui_destroy_artifact":

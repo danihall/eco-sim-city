@@ -17,7 +17,7 @@ async function init(data) {
     canvas = data.offscreen_canvas;
     ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = false;
-    ctx.strokeStyle = "#989898";
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.3)";
     ctx.lineWidth = 1;
     pixel_ratio = data.pixel_ratio;
     return { ready: true };
@@ -28,8 +28,10 @@ function render(data) {
         drawHexLines(center);
     }
 }
-const half_hex = 7.5;
-const half_side = 3.5;
+// const half_hex = 7.5;
+// const half_side = 3.5;
+const half_hex = 8;
+const half_side = 4;
 function drawHexLines(center) {
     ctx.beginPath();
     ctx.moveTo(center.x, center.y - half_hex);

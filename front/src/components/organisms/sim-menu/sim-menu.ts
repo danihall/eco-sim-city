@@ -1,7 +1,8 @@
 import type { ArtifactsKey, HeatmapKey, ZoneKey } from "constants";
-import { BaseComponent } from "components";
+import { UdonComponent } from "components";
 import * as _ from "utils";
-import css from "./sim-menu.css" with { type: "css" };
+import css_global from "../../../styles.css" with { type: "css" };
+import css_menu from "./sim-menu.css" with { type: "css" };
 
 type MenuState = {
   selected_action: string | undefined;
@@ -14,8 +15,14 @@ declare module "components" {
   }
 }
 
-class SimMenu extends BaseComponent {
-  static styles = [css];
+declare module "components" {
+  interface ChannelEvents {
+    "menu-state-change": MenuState;
+  }
+}
+
+class SimMenu extends UdonComponent {
+  static css = [css_global, css_menu];
 
   #state: MenuState = {
     selected_action: undefined,
@@ -23,7 +30,7 @@ class SimMenu extends BaseComponent {
   };
 
   render() {
-    this.html`
+    return this.html /*html*/ `
       <div data-action="build" >
           <button data-item="BusStop">bus stop</button>
           <button data-item="TrainStation">train station</button>
@@ -33,9 +40,13 @@ class SimMenu extends BaseComponent {
           <button data-item="CoalPlant">centrale à charbon</button>
       </div>
 
-      <div data-action="zoning">
+      <div data-action="update-zoning">
           <button data-item="Industrial">zone industrial</button>
           <button data-item="Residential">zone residential</button>
+      </div>
+
+      <div data-action="revert-zoning">
+          <button>unzone</button>
       </div>
 
       <div data-action="build-pathway">
@@ -48,6 +59,10 @@ class SimMenu extends BaseComponent {
         <button>destroy</button>
       </div>
 
+      <div data-action="ordinances">
+        <button>arrêtés municipaux</button>
+      </div>
+
       <div data-action="query">
           <button data-item="traffic">query traffic</button>
       </div>
@@ -55,7 +70,7 @@ class SimMenu extends BaseComponent {
       `;
   }
 
-  async onComponentMounted() {
+  async onMounted() {
     this.addEventListener("click", this);
   }
 

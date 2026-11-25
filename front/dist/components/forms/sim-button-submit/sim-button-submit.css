@@ -1,0 +1,35 @@
+sim-button-submit {
+    --easing: var(--spring-easing);
+    display: block;
+
+    & > button {
+        appearance: none;
+        display: flex;
+        align-items: center;
+        border-radius: var(--border-radius-large);
+        border: var(--border-1);
+        border-color: var(--grey-strong);
+        padding-block: var(--padding-y-medium);
+        padding-inline: var(--padding-x-medium);
+        white-space: nowrap;
+        overflow: hidden;
+        color: var(--black-dimmed);
+        background-color: var(--bg-color-dimmed);
+        box-shadow: var(--shadow-2);
+        cursor: default;
+
+        & > span + sim-spinner {
+            margin-left: 12px;
+        }
+
+        &:disabled {
+            border-color: transparent;
+            color: var(--grey-very-strong);
+        }
+
+        &:not(:disabled):hover {
+            cursor: pointer;
+            background-color: var(--pure-white);
+        }
+    }
+}

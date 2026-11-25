@@ -1,17 +1,17 @@
-import { BaseComponent } from "components";
+import { UdonComponent } from "components";
 import * as C from "constants";
 import * as api from "api";
 import css from "./sim-canvas.css" with { type: "css" };
 const spritesheet_blob = await api.getSpritesheet();
-class SimCanvas extends BaseComponent {
-    static styles = [css];
+class SimCanvas extends UdonComponent {
+    static css = [css];
     #city;
     #worker;
     #name = this.id;
     render() {
-        this.html `<canvas></canvas>`;
+        return this.html /* html */ `<canvas></canvas>`;
     }
-    async onComponentMounted() {
+    async onMounted() {
         this.#city = await this.channel.request("sim-city");
         const canvas = this.shadowRoot.querySelector("canvas");
         const { width, height } = this.#city.getBoundingClientRect();
@@ -31,9 +31,8 @@ class SimCanvas extends BaseComponent {
                         offscreen_canvas,
                     };
                     this.#worker = await this.#initCanvasWorkers(init_data);
-                    console.log(this.#name);
                     this.onGridRender();
-                    return this.channel.subscribe("grid-render", this);
+                    return this.channel.subscribe("grid-render");
                 }
                 case "artifacts": {
                     const sprites = await this.#generateSprites("artifacts");
@@ -45,9 +44,8 @@ class SimCanvas extends BaseComponent {
                         sprites,
                     };
                     this.#worker = await this.#initCanvasWorkers(init_data);
-                    console.log(this.#name);
                     this.onRender();
-                    return this.channel.subscribe("render", this);
+                    return this.channel.subscribe("render");
                 }
                 case "zones": {
                     const sprites = await this.#generateSprites("zones");
@@ -59,9 +57,8 @@ class SimCanvas extends BaseComponent {
                         sprites,
                     };
                     this.#worker = await this.#initCanvasWorkers(init_data);
-                    console.log(this.#name);
                     this.onRender();
-                    return this.channel.subscribe("render", this);
+                    return this.channel.subscribe("render");
                 }
                 case "heatmap": {
                     const sprites = await this.#generateSprites("heatmap");
@@ -73,8 +70,7 @@ class SimCanvas extends BaseComponent {
                         sprites,
                     };
                     this.#worker = await this.#initCanvasWorkers(init_data);
-                    console.log(this.#name);
-                    return this.channel.subscribe("heatmap-render", this);
+                    return this.channel.subscribe("heatmap-render");
                 }
                 case "ui": {
                     const sprites = await this.#generateSprites("zones", "artifacts");
@@ -86,9 +82,7 @@ class SimCanvas extends BaseComponent {
                         sprites,
                     };
                     this.#worker = await this.#initCanvasWorkers(init_data);
-                    console.log(this.#name);
-                    return (this.channel.subscribe("ui-reset", this),
-                        this.channel.subscribe("ui-render", this));
+                    return (this.channel.subscribe("ui-reset"), this.channel.subscribe("ui-render"));
                 }
             }
         }

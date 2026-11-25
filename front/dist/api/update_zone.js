@@ -1,5 +1,5 @@
 import { getCityID } from "utils";
-async function zoneSuperKind(payload) {
+async function updateZone(payload) {
     const method = "PATCH";
     const headers = { "Content-Type": "application/json" };
     const url = `/city/${getCityID()}/zoning/update`;
@@ -19,4 +19,4 @@ async function zoneSuperKind(payload) {
     }
     return updated_tiles;
 }
-export { zoneSuperKind };
+export { updateZone };

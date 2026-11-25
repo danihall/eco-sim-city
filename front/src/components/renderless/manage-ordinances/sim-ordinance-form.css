@@ -1,0 +1,135 @@
+:host {
+    display: block;
+
+    & > form {
+        & > header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+
+            & > h2 {
+                color: var(--pure-black-dimmed);
+                text-decoration: underline;
+                text-decoration-thickness: 4px;
+                text-decoration-color: var(--grey-dimmed);
+
+                & + span {
+                    color: var(--grey-very-strong);
+                    text-decoration: underline;
+                    text-decoration-thickness: 4px;
+                    text-decoration-color: var(--grey-dimmed);
+                    text-decoration-skip-ink: none;
+                }
+            }
+        }
+
+        & > div {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 72px;
+            padding-block: 12px;
+
+            &::after {
+                display: block;
+                position: absolute;
+                left: calc(var(--padding-x-large) * -1);
+                bottom: 0;
+                content: "";
+                width: calc(100% + var(--padding-x-large) * 2);
+                height: 1px;
+                background-color: var(--grey-dimmed);
+            }
+
+            &:first-of-type {
+                padding-top: 0;
+                margin-top: 32px;
+            }
+
+            &:last-of-type {
+                &::after {
+                    background-color: transparent;
+                }
+            }
+
+            & > input-checkbox,
+            & > span {
+                opacity: 0;
+                translate: 5px -2px;
+            }
+
+            & > span {
+                color: var(--grey-very-strong);
+            }
+
+            &:hover {
+                & > span {
+                    opacity: 0.7;
+                    translate: 0 0;
+                }
+            }
+        }
+
+        & > footer {
+            & > sim-button-submit {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                opacity: 0;
+                translate: calc(var(--padding-x-large) / -2 + 20px) 50%;
+            }
+        }
+
+        &.make-appearance {
+            & > div {
+                & > input-checkbox {
+                    animation: showElement;
+                    animation-duration: 50ms;
+                    animation-fill-mode: forwards;
+                    animation-timing-function: ease-out;
+                    animation-delay: calc((var(--index)) * 25ms);
+                }
+
+                &:has(input-checkbox:state(checked)) {
+                    & > span {
+                        animation: showElement;
+                        animation-duration: 50ms;
+                        animation-fill-mode: forwards;
+                        animation-timing-function: ease-out;
+                        animation-delay: calc((var(--index)) * 25ms);
+                    }
+                }
+            }
+
+            & > footer {
+                & > sim-button-submit {
+                    animation: showButton;
+                    animation-duration: 600ms;
+                    animation-fill-mode: forwards;
+                    animation-timing-function: var(--spring-easing);
+                    animation-delay: 140ms;
+                }
+            }
+        }
+    }
+}
+
+/* Firefox has a bug where we cannot nest selectors and use `:has` combined with `:state()` */
+form:has(sim-popover:state(opened)) {
+    pointer-events: none;
+}
+
+@keyframes showElement {
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+@keyframes showButton {
+    to {
+        opacity: 1;
+        translate: calc(var(--padding-x-large) / -2) 50%;
+    }
+}

@@ -1,5 +1,5 @@
 import { HEX_HEIGHT, HEX_WIDTH, TILES_COUNT } from "constants";
-import { BaseComponent } from "components";
+import { UdonComponent } from "components";
 import * as api from "api";
 import * as $ from "assets";
 import * as _ from "utils";
@@ -12,8 +12,8 @@ const pointer_events = [
     "pointerleave",
     "click",
 ];
-class SimCity extends BaseComponent {
-    static styles = [css];
+class SimCity extends UdonComponent {
+    static css = [css];
     #camera = { x: 0, y: 0, zoom: 1 };
     #shared_buffers = {
         artifact_ids: new SharedArrayBuffer(TILES_COUNT * 1),
@@ -42,9 +42,9 @@ class SimCity extends BaseComponent {
         subway_traffic: new Uint32Array(this.#shared_buffers.subway_traffic),
     };
     render() {
-        this.html `<slot></slot>`;
+        return this.html /* html */ `<slot></slot>`;
     }
-    async onComponentMounted() {
+    async onMounted() {
         try {
             const tiles_bytes = await api.getAllTiles();
             this.#state.artifact_ids.set(tiles_bytes.subarray(0, TILES_COUNT));
@@ -54,8 +54,8 @@ class SimCity extends BaseComponent {
             this.#state.zones.set(tiles_bytes.subarray(TILES_COUNT * 4, TILES_COUNT * 5));
             this.ownerDocument.addEventListener("keydown", this);
             pointer_events.forEach((event_name) => this.addEventListener(event_name, this));
-            this.channel.subscribe("update-city-state", this);
-            this.channel.subscribe("update-city-zones", this);
+            this.channel.subscribe("update-city-state");
+            this.channel.subscribe("update-city-zones");
         }
         catch (reason) {
             console.error(reason);
@@ -104,8 +104,8 @@ class SimCity extends BaseComponent {
             const tile_index = _.getTileIndex(tile.position.q, tile.position.r);
             this.#state.artifact_ids[tile_index] =
                 tile_index === anchor_index || has_free_size ? artifact_id : 0;
-            this.state.anchor_qs[tile_index] = tile.anchor.q;
-            this.state.anchor_rs[tile_index] = tile.anchor.r;
+            this.#state.anchor_qs[tile_index] = tile.anchor.q;
+            this.#state.anchor_rs[tile_index] = tile.anchor.r;
             this.#state.artifact_statuses[tile_index] = status_id;
             this.#state.zones[tile_index] = super_kind_id;
         });
