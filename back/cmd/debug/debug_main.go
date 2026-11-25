@@ -92,8 +92,8 @@ func main() {
 	mux.Handle("PATCH /city/{id}/construction/build", handlers.BuildArtifact(app))
 	mux.Handle("PATCH /city/{id}/construction/build-pathway", handlers.BuildPathway(app))
 	mux.Handle("PATCH /city/{id}/construction/destroy", handlers.DestroyArtifact(app))
-	mux.Handle("POST /city/{id}/ordinances/enact", handlers.EnactOrdinance(app))
-	mux.Handle("DELETE /city/{id}/ordinances/revoke", handlers.RevokeOrdinance(app))
+	mux.Handle("GET /city/{id}/ordinances", handlers.GetAllOrdinances(app))
+	mux.Handle("PUT /city/{id}/ordinances/set", handlers.SetOrdinances(app))
 	mux.Handle("GET /city/{id}/traffic", handlers.GetCityTraffic(app))
 	// SSE
 	mux.Handle("GET /city/{id}/sse", handlers.ServerSideEvents(app))

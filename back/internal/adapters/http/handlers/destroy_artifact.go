@@ -33,7 +33,7 @@ func DestroyArtifact(a *app.App) adapterhttp.CustomHandler {
 			return nil, err
 		}
 
-		payload, err := utilshandler.Decode[destroyPayload](w, r)
+		payload, err := utilshandler.DecodeJSON[destroyPayload](w, r)
 		if err != nil {
 			return nil, err
 		}

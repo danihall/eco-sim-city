@@ -93,11 +93,12 @@ func (s *Store) Revert(
 	if err != nil {
 		return nil, getPostgresError(err)
 	}
-	if len(response) == 0 {
-		return nil, getPostgresError(err)
-	}
 
 	reverted_tiles := make([]core.Tile, len(response))
+
+	if len(response) == 0 {
+		return reverted_tiles, nil
+	}
 
 	for index := range response {
 		tile := response[index]

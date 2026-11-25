@@ -1,14 +1,16 @@
--- name: EnactOrdinance :exec
+-- name: EnactOrdinances :exec
 INSERT INTO
     mutable.ordinances_enacted (city_id, ordinance_id)
-VALUES (@city_id, @ordinance_id);
+SELECT
+    @city_id, UNNEST(@ordinance_ids::SMALLINT[])
+ON CONFLICT DO NOTHING;
 
--- name: RevokeOrdinance :exec
+-- name: RevokeOrdinances :exec
 DELETE FROM
     mutable.ordinances_enacted
 WHERE
-    city_id = @city_id
-    AND ordinance_id = @ordinance_id;
+    city_id = @city_id;
+
 
 -- name: GetEnactedOrdinances :many
 SELECT

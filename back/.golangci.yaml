@@ -1,0 +1,24 @@
+version: "2"
+
+linters:
+  enable:
+    - exhaustruct
+    - funlen
+  settings:
+    exhaustruct:
+      exclude:
+        - '.*/api\.Response$'
+        - '.*/core\.Tile$'
+        - '.*/core\.Kind$'
+        - '.*/core\.Artifact$'
+        - '.*/core\.Effects$'
+        - '.*/core\.GlobalEffects$'
+        - '.*/core\.Requirements$'
+        - '.*/core\.GlobalRequirements$'
+        - '.*/core\.TravelCost$'
+        - '.*/pgtype\.Int2$'
+        - '.*/tint\.Options$'
+        - '.*/slog\.HandlerOptions$'
+    funlen:
+      lines: 60
+      statements: 40

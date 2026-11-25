@@ -8,16 +8,17 @@ import (
 )
 
 type PolicyManager interface {
-	Enact(
+	Set(
 		ctx context.Context,
 		city_id int32,
-		ordinance_name core.OrdinanceType,
+		ordinances []core.OrdinanceType,
 	) error
-	Revoke(
-		ctx context.Context,
-		city_id int32,
-		ordinance_name core.OrdinanceType,
-	) error
+}
+
+type OrdinanceWithState struct {
+	core.Ordinance `json:"ordinance"`
+	TotalCost      int64 `json:"total_cost"`
+	IsEnacted      bool  `json:"is_enacted"`
 }
 
 type PolicyGetter interface {
@@ -31,6 +32,10 @@ type PolicyEffectKey struct {
 	core.EffectType
 }
 
+/**
+ * MakeEffectiveTravelEffects takes enacted ordinances and apply
+ * its effect on transport network artifacts.
+ */
 func (p PolicyMapper) MakeEffectiveTravelEffects(
 	enacted_ordinances []core.OrdinanceType,
 ) map[PolicyEffectKey]int16 {

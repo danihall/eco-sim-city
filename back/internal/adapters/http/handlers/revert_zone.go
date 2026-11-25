@@ -39,7 +39,7 @@ func RevertZone(a *app.App) adapterhttp.CustomHandler {
 			return nil, err
 		}
 
-		payload, err := utilshandler.Decode[revertPayload](w, r)
+		payload, err := utilshandler.DecodeJSON[revertPayload](w, r)
 		if err != nil {
 			return nil, err
 		}

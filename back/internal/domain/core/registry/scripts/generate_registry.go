@@ -136,6 +136,7 @@ var SocialClasses = map[core.KindType]core.SocialClass{
 var Ordinances = map[core.OrdinanceType]core.Ordinance{
 {{- range .Ordinances}}
 	core.{{ .Name}}: core.Ordinance{
+		CostPerCitizen: {{ .CostPerCitizen}},
 		Label: "{{ .Label}}",
 		Description: "{{ .Description}}",
 	},

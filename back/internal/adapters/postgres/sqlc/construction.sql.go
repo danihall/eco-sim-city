@@ -444,7 +444,9 @@ SET
     artifact_id = $3,
     artifact_label = $4,
     artifact_status = $5,
-    has_all_citizen_allocated = $6
+    has_all_citizen_allocated = $6,
+    anchor_q = _tile.q,
+    anchor_r = _tile.r
 WHERE
     _tile.city_id = $7
     AND _tile.anchor_q = $8

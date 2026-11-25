@@ -4154,19 +4154,23 @@ var SocialClasses = map[core.KindType]core.SocialClass{
 
 var Ordinances = map[core.OrdinanceType]core.Ordinance{
 	core.DrugPrevention: core.Ordinance{
-		Label:       "campagnes de prévention sur les drogues",
-		Description: "Informe les habitants sur les risques liés à la consommation de drogues. Réduit la criminalité liée et améliore le niveau de santé",
+		CostPerCitizen: 1,
+		Label:          "campagnes de prévention sur les drogues",
+		Description:    "Informe les habitants sur les risques liés à la consommation de drogues. Réduit la criminalité liée et améliore le niveau de santé",
 	},
 	core.PassCulture: core.Ordinance{
-		Label:       "Pass culture",
-		Description: "Alloue un budget pour des achats culturels à chaque jeune habitant. Améliore leur niveau d'éducation",
+		CostPerCitizen: 3,
+		Label:          "Pass culture",
+		Description:    "Alloue un budget pour des achats culturels à chaque jeune habitant. Améliore leur niveau d'éducation",
 	},
 	core.VSSCampaign: core.Ordinance{
-		Label:       "campagnes d'information sur les agressions sexistes et sexuelles",
-		Description: "Sensibilise les habitants aux problématiques de comportement et actes relevant d'agressions sexistes et sexuelles. Améliore le niveau d'éducation et réduit la criminalité liée aux VSS",
+		CostPerCitizen: 2,
+		Label:          "campagnes d'information sur les VSS",
+		Description:    "Sensibilise les habitants aux problématiques de comportement et actes relevant d'agressions sexistes et sexuelles. Améliore le niveau d'éducation et réduit la criminalité liée aux VSS",
 	},
 	core.FreeBicycles: core.Ordinance{
-		Label:       "vélos en libre-service",
-		Description: "Fournit des vélos en libre-service. Peut potentiellement réduire la pollution liée à la circulation",
+		CostPerCitizen: 4,
+		Label:          "vélos en libre-service",
+		Description:    "Fournit des vélos en libre-service. Peut potentiellement réduire la pollution liée à la circulation",
 	},
 }

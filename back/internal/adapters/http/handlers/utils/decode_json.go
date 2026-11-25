@@ -34,7 +34,7 @@ type Validator interface {
 	Validate() error
 }
 
-func Decode[P any](w http.ResponseWriter, r *http.Request) (*P, error) {
+func DecodeJSON[P any](w http.ResponseWriter, r *http.Request) (*P, error) {
 	payload := new(P)
 
 	r.Body = http.MaxBytesReader(w, r.Body, 10_000)

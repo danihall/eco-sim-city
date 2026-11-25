@@ -16,9 +16,10 @@ const (
 // An Ordinance, if enacted, must be taken into account when computing the Effects of an Artifact.
 // It acts as an additional value for an Effect.
 type Ordinance struct {
-	Name        OrdinanceType
-	Label       string
-	Description string
+	Name           OrdinanceType `json:"name"`
+	CostPerCitizen int8          `json:"cost_per_citizen"`
+	Label          string        `json:"label"`
+	Description    string        `json:"description"`
 }
 
 type OrdinanceEffect struct {

@@ -11,19 +11,21 @@ import (
 	"git.sr.ht/~danihall/foss-eco-simcity-hex-back/internal/domain/core"
 )
 
-const enactOrdinance = `-- name: EnactOrdinance :exec
+const enactOrdinances = `-- name: EnactOrdinances :exec
 INSERT INTO
     mutable.ordinances_enacted (city_id, ordinance_id)
-VALUES ($1, $2)
+SELECT
+    $1, UNNEST($2::SMALLINT[])
+ON CONFLICT DO NOTHING
 `
 
-type EnactOrdinanceParams struct {
-	CityID      int32              `db:"city_id"`
-	OrdinanceID core.OrdinanceType `db:"ordinance_id"`
+type EnactOrdinancesParams struct {
+	CityID       int32   `db:"city_id"`
+	OrdinanceIds []int16 `db:"ordinance_ids"`
 }
 
-func (q *Queries) EnactOrdinance(ctx context.Context, arg EnactOrdinanceParams) error {
-	_, err := q.db.Exec(ctx, enactOrdinance, arg.CityID, arg.OrdinanceID)
+func (q *Queries) EnactOrdinances(ctx context.Context, arg EnactOrdinancesParams) error {
+	_, err := q.db.Exec(ctx, enactOrdinances, arg.CityID, arg.OrdinanceIds)
 	return err
 }
 
@@ -56,21 +58,15 @@ func (q *Queries) GetEnactedOrdinances(ctx context.Context, cityID int32) ([]cor
 	return items, nil
 }
 
-const revokeOrdinance = `-- name: RevokeOrdinance :exec
+const revokeOrdinances = `-- name: RevokeOrdinances :exec
 DELETE FROM
     mutable.ordinances_enacted
 WHERE
     city_id = $1
-    AND ordinance_id = $2
 `
 
-type RevokeOrdinanceParams struct {
-	CityID      int32              `db:"city_id"`
-	OrdinanceID core.OrdinanceType `db:"ordinance_id"`
-}
-
-func (q *Queries) RevokeOrdinance(ctx context.Context, arg RevokeOrdinanceParams) error {
-	_, err := q.db.Exec(ctx, revokeOrdinance, arg.CityID, arg.OrdinanceID)
+func (q *Queries) RevokeOrdinances(ctx context.Context, cityID int32) error {
+	_, err := q.db.Exec(ctx, revokeOrdinances, cityID)
 	return err
 }
 

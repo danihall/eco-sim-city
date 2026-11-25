@@ -61,7 +61,7 @@ func UpdateZone(a *app.App) adapterhttp.CustomHandler {
 			return nil, err
 		}
 
-		payload, err := utilshandler.Decode[updatePayload](w, r)
+		payload, err := utilshandler.DecodeJSON[updatePayload](w, r)
 		if err != nil {
 			return nil, err
 		}

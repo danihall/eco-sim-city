@@ -45,7 +45,7 @@ func BuildPathway(a *app.App) adapterhttp.CustomHandler {
 			return nil, err
 		}
 
-		payload, err := utilshandler.Decode[buildPathwayPayload](w, r)
+		payload, err := utilshandler.DecodeJSON[buildPathwayPayload](w, r)
 		if err != nil {
 			return nil, err
 		}

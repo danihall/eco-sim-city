@@ -46,6 +46,18 @@ build-artifact:
 build-pathway:
 	@curlie -v PATCH ":$(APP_PORT)/city/$(id)/construction/build-pathway" coordinates:='[{"q": 0, "r": 0}]' artifact_name=Road
 
+.PHONY: enact-ordinance
+enact-ordinance:
+	@curlie -v POST ":$(APP_PORT)/city/$(id)/ordinances/enact" ordinance_name=VSSCampaign
+
+.PHONY: revoke-ordinance
+revoke-ordinance:
+	@curlie -v DELETE ":$(APP_PORT)/city/$(id)/ordinances/revoke" ordinance_name=VSSCampaign
+
+.PHONY: get-all-ordinances
+get-all-ordinances:
+	@curlie -v GET ":$(APP_PORT)/city/$(id)/ordinances"
+
 # todo
 .PHONY: get-tiles-spatial-values
 .PHONY: get-city-stats

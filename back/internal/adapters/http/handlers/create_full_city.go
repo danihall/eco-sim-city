@@ -68,7 +68,7 @@ func (c *cityPayload) Validate() error {
 
 func CreateFullCity(a *app.App) adapterhttp.CustomHandler {
 	return func(w http.ResponseWriter, r *http.Request) (*adapterhttp.Response, error) {
-		payload, err := utilshandler.Decode[cityPayload](w, r)
+		payload, err := utilshandler.DecodeJSON[cityPayload](w, r)
 		if err != nil {
 			return nil, err
 		}

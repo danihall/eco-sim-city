@@ -57,7 +57,7 @@ func BuildArtifact(a *app.App) adapterhttp.CustomHandler {
 			return nil, err
 		}
 
-		payload, err := utilshandler.Decode[buildPayload](w, r)
+		payload, err := utilshandler.DecodeJSON[buildPayload](w, r)
 		if err != nil {
 			return nil, err
 		}

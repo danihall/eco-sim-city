@@ -11,36 +11,32 @@ import (
 var _ cityhall.PolicyManager = (*Store)(nil)
 var _ cityhall.PolicyGetter = (*Store)(nil)
 
-// Enact implements PolicyManager.Enact
-func (s *Store) Enact(
+// Set implements PolicyManager.Set
+func (s *Store) Set(
 	ctx context.Context,
 	city_id int32,
-	ordinance_name core.OrdinanceType,
+	ordinances []core.OrdinanceType,
 ) error {
 	queries := s.q(ctx)
 
-	err := queries.EnactOrdinance(ctx, sqlc.EnactOrdinanceParams{
-		CityID:      city_id,
-		OrdinanceID: ordinance_name,
-	})
+	err := queries.RevokeOrdinances(ctx, city_id)
 	if err != nil {
 		return getPostgresError(err)
 	}
 
-	return nil
-}
+	if len(ordinances) == 0 {
+		return nil
+	}
 
-// Revoke implements PolicyManager.Revoke
-func (s *Store) Revoke(
-	ctx context.Context,
-	city_id int32,
-	ordinance_name core.OrdinanceType,
-) error {
-	queries := s.q(ctx)
+	ordinance_ids := make([]int16, len(ordinances))
 
-	err := queries.RevokeOrdinance(ctx, sqlc.RevokeOrdinanceParams{
-		CityID:      city_id,
-		OrdinanceID: ordinance_name,
+	for index, id := range ordinances {
+		ordinance_ids[index] = int16(id)
+	}
+
+	err = queries.EnactOrdinances(ctx, sqlc.EnactOrdinancesParams{
+		CityID:       city_id,
+		OrdinanceIds: ordinance_ids,
 	})
 	if err != nil {
 		return getPostgresError(err)
